@@ -261,6 +261,44 @@ body.celebrate { animation: party 1.5s ease-in-out infinite; }
   50%     { filter: hue-rotate(15deg); }
 }
 
+/* Fireworks */
+.firework {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  animation: burst ease-out forwards;
+  pointer-events: none;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 0 8px rgba(255, 200, 100, 0.6));
+}
+@keyframes burst {
+  0%   { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+  15%  { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1); opacity: 0; }
+}
+
+/* Big happy cow in the center */
+#bigCow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(140px, 28vw, 320px);
+  z-index: 6;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,0.25));
+  animation: bigCowIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+             bigCowWiggle 2.4s ease-in-out 0.8s infinite;
+}
+@keyframes bigCowIn {
+  0%   { transform: translate(-50%, -50%) scale(0) rotate(-30deg); opacity: 0; }
+  60%  { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0); opacity: 1; }
+}
+@keyframes bigCowWiggle {
+  0%,100% { transform: translate(-50%, -50%) rotate(-5deg) scale(1); }
+  50%     { transform: translate(-50%, -52%) rotate(5deg) scale(1.05); }
+}
+
 footer {
   position: relative;
   z-index: 5;
